@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+    -->
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+  <!-- Tell the browser it's a PWA -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <!-- Tell iOS it's a PWA -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>PWA App</title>
+  <div class="header">
+    <div class="container">
+       <h1 style="color: white"><marquee direction="left">Welcome to ThreeHappyCats</marquee></h1>
+    </div>
+  </div>
+  <center>
+    <h2 style="color: blue">Show Cat Bread (8 species.)</h2>
+    <img src="images/1.jpg" alt="cats"width='600px' hight='400px'/>
+  </center>
+  <style type="text/css">
+   body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      font-weight: 50;
+    }
+
+    .App {
+      text-align: center;
+      font-size: 25px;
+    }
+
+    .App-logo {
+      height: 80px;
+    }
+
+    .App-header {
+      background-color: #222;
+      height: 150px;
+      padding: 20px;
+      color: white;
+    }
+
+    .App-title {
+      font-size: 1.5em;
+    }
+
+    .App-intro {
+      font-size: large;
+    }
+
+    .container {
+      margin: 0 auto;
+      max-width: 70%;
+    }
+
+    h1 {
+      padding: 0 25px;
+      background-color: #00FA9A;
+    }
+
+    h2 {
+      padding: 0 25px;
+      background: #66CDAA;
+    }
+
+    @keyframes App-logo-spin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root">
+    <div class="App">
+      <p>
+        Loading...
+      </p>
+    </div>
+
+    <script>
+      //random images
+    const images = ["1", "2", "3", "4","5", "6", "7", "8"];
+    const imgElem = document.querySelector("img");
+
+    function randomValueFromArray(array) {
+      let randomNo = Math.floor(Math.random() * array.length);
+      return array[randomNo];
+    }
+
+    setInterval(function() {
+      let randomChoice = randomValueFromArray(images);
+      imgElem.src = "images/" + randomChoice + ".jpg";
+    }, 2000);
+
+    //serviceWorker
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('service-worker.js').then(function (registration) {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          }, function (err) {
+            console.log('ServiceWorker registration failed: ', err);
+          }).catch(function (err) {
+            console.log(err)
+          });
+        });
+      } else {
+        console.log('service worker is not supported');
+      }
+    </script>
+
+</body>
+
+</html>
